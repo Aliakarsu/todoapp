@@ -21,23 +21,24 @@ public class TodoController {
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<TodoItem> getTodoById(@PathVariable Long id) {
+    public Optional<TodoItem> getTodoById(@PathVariable(name = "id") long id) {
         return todoService.findById(id);
     }
 
     @PostMapping
     public TodoItem createTodoItem(@RequestBody TodoItem todoItem) {
+        System.out.println(todoItem);
         return todoService.save(todoItem);
     }
 
     @PutMapping(path = "/{id}")
-    public TodoItem updateTodoItem(@PathVariable Long id, @RequestBody TodoItem todoItem) {
+    public TodoItem updateTodoItem(@PathVariable(name = "id") long id, @RequestBody TodoItem todoItem) {
         todoItem.setId(id);
         return todoService.save(todoItem);
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteTodoItem(@PathVariable Long id) {
+    public void deleteTodoItem(@PathVariable(name = "id") long id) {
         todoService.deleteById(id);
     }
 
